@@ -19,6 +19,7 @@
                 "C:/msys64/mingw64/include/libpng16",
                 "C:/msys64/mingw64/include/pixman-1"
             ],
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
             "defines": [
                 "_DEBUG",
                 "UNICODE",
