@@ -6,44 +6,42 @@ void on_enter_pressed(GtkEditable *entry, gpointer user_data) {
   for (int i = 0; usertext[i] != '\0'; i++) {
     if (usertext[i+1] != '\0') {
       int digitcounter = 0;
-      switch (usertext[i]) {
-        double leftnum;
-        double rightnum;
-        char oper;
-        
-        if (sscanf(usertext, "%lf %c %lf", &leftnum, &oper, &rightnum) == 0) {
-          g_print("sscanf error\n");
-        }
-        
-        double rightnum;
-        if (num != 0.0) {
-          leftnum += num;
-        }
+      double leftnum;
+      double rightnum;
+      char oper;
+      
+      if (sscanf(usertext, "%lf %c %lf", &leftnum, &oper, &rightnum) == 0) {
+        g_print("sscanf error\n");
+      }
+      
+/*       if (num != 0.0) {
+        leftnum = num;
+      } */
 
-        switch (oper) {
-          case '+':
-            num = leftnum + rightnum;
-            break;
-          case '-':
-            num = leftnum - rightnum;
-            break;
-          case '*':
-            num = leftnum * rightnum;
-            break;
-          case '/':
-            num = leftnum / rightnum;
-            break;
-          case '^':
-            num = pow(leftnum, rightnum);
-        }
+      switch (oper) {
+        case '+':
+          num = leftnum + rightnum;
+          break;
+        case '-':
+          num = leftnum - rightnum;
+          break;
+        case '*':
+          num = leftnum * rightnum;
+          break;
+        case '/':
+          num = leftnum / rightnum;
+          break;
+        case '^':
+          num = pow(leftnum, rightnum);
+          break;
       }
     }
     }
     char str[20];
   if (num == (long long)num) {
-    snprintf(str, sizeof(str), "%.0f", num);
+    snprintf(str, sizeof(str), "%g", num);
   } else {
-    snprintf(str, sizeof(str), "%.1f", num);
+    snprintf(str, sizeof(str), "%g", num);
   }
   gtk_label_set_text(GTK_LABEL(user_data), str);
 }
