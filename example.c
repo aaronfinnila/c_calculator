@@ -14,10 +14,8 @@ void on_enter_pressed(GtkEditable *entry, gpointer user_data) {
         g_print("sscanf error\n");
       }
       
-/*       if (num != 0.0) {
-        leftnum = num;
-      } */
-
+     // make it work for multiple operations, parentheses etc
+     // make ui buttons for operands, like square root etc
       switch (oper) {
         case '+':
           num = leftnum + rightnum;
