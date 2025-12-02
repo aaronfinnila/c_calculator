@@ -79,12 +79,22 @@ static void activate(GtkApplication *app) {
   GtkWidget *button7 = gtk_button_new_with_label("7");
   GtkWidget *button8 = gtk_button_new_with_label("8");
   GtkWidget *button9 = gtk_button_new_with_label("9");
+  GtkWidget *button0 = gtk_button_new_with_label("0");
   GtkWidget *button_plus = gtk_button_new_with_label("+");
   GtkWidget *button_minus = gtk_button_new_with_label("-");
   GtkWidget *button_divide = gtk_button_new_with_label("/");
   GtkWidget *button_multiply = gtk_button_new_with_label("*");
   GtkWidget *button_power = gtk_button_new_with_label("^");
   GtkWidget *button_enter = gtk_button_new_with_label("=");
+
+  gtk_widget_add_css_class(label, "label");
+  GtkCssProvider *provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_string(provider, ".label { font-size: 24px; color: #000000; }");
+  gtk_style_context_add_provider_for_display(
+    gdk_display_get_default(),
+    GTK_STYLE_PROVIDER(provider),
+    GTK_STYLE_PROVIDER_PRIORITY_USER
+  );
 
   EntryAndLabel *eal = g_new(EntryAndLabel, 1);
   eal->entry = GTK_EDITABLE(entry);
@@ -106,12 +116,13 @@ static void activate(GtkApplication *app) {
   gtk_grid_attach(GTK_GRID(grid), button7, 0, 4, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button8, 1, 4, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button9, 2, 4, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_plus, 0, 5, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_minus, 1, 5, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_divide, 2, 5, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_multiply, 0, 6, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_power, 1, 6, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button_enter, 2, 6, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button0, 0, 5, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_plus, 1, 5, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_minus, 2, 5, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_divide, 0, 6, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_multiply, 1, 6, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_power, 2, 6, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), button_enter, 0, 7, 1, 1);
   gtk_window_present(GTK_WINDOW(window));
   
   gtk_widget_grab_focus(entry);
@@ -125,6 +136,7 @@ static void activate(GtkApplication *app) {
   g_signal_connect(button7, "clicked", G_CALLBACK(on_button_pressed), entry);
   g_signal_connect(button8, "clicked", G_CALLBACK(on_button_pressed), entry);
   g_signal_connect(button9, "clicked", G_CALLBACK(on_button_pressed), entry);
+  g_signal_connect(button0, "clicked", G_CALLBACK(on_button_pressed), entry);
   g_signal_connect(button_plus, "clicked", G_CALLBACK(on_button_pressed), entry);
   g_signal_connect(button_minus, "clicked", G_CALLBACK(on_button_pressed), entry);
   g_signal_connect(button_divide, "clicked", G_CALLBACK(on_button_pressed), entry);
