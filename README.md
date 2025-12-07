@@ -1,1 +1,2 @@
-Calculator application with graphical user interface made in C.
+Calculator application made in C. Graphical user interface made with gtk4 library.
+
