@@ -20,7 +20,6 @@ void on_enter_pressed(GtkEditable *entry, gpointer user_data) {
       }
       
      // make it work for multiple operations, parentheses etc
-     // make ui buttons for operands, like square root etc
       switch (oper) {
         case '+':
           num = leftnum + rightnum;
@@ -86,7 +85,8 @@ static void activate(GtkApplication *app) {
   GtkWidget *button_multiply = gtk_button_new_with_label("*");
   GtkWidget *button_power = gtk_button_new_with_label("^");
   GtkWidget *button_enter = gtk_button_new_with_label("=");
-
+  GtkSettings *settings = gtk_settings_get_for_display(gtk_widget_get_display(window));
+  g_object_set(settings, "gtk-error-bell", FALSE, NULL);
   gtk_widget_add_css_class(label, "label");
   GtkCssProvider *provider = gtk_css_provider_new();
   gtk_css_provider_load_from_string(provider, ".label { font-size: 24px; color: #000000; }");
