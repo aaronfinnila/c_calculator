@@ -56,7 +56,6 @@ void on_button_pressed(GtkButton *button, gpointer user_data) {
   g_string_append(s, buttontext);
   gtk_editable_set_text(GTK_EDITABLE(entry), s->str);
   g_string_free(s, TRUE);
-  gtk_widget_grab_focus(GTK_WIDGET(entry));
 }
 
 void on_button_enter(GtkButton *button, gpointer user_data) {
