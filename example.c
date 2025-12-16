@@ -9,38 +9,36 @@ typedef struct {
 void on_enter_pressed(GtkEditable *entry, gpointer user_data) {
   const char *usertext = gtk_editable_get_text(entry);
   double num = 0.0;
-  for (int i = 0; usertext[i] != '\0'; i++) {
-    if (usertext[i+1] != '\0') {
-      int digitcounter = 0;
-      double leftnum;
-      double rightnum;
-      char oper;
-      
-      if (sscanf(usertext, "%lf %c %lf", &leftnum, &oper, &rightnum) == 0) {
-        g_print("sscanf error\n");
-      }
-      
-     // make it work for multiple operations, parentheses etc
-      switch (oper) {
-        case '+':
-          num = leftnum + rightnum;
-          break;
-        case '-':
-          num = leftnum - rightnum;
-          break;
-        case '*':
-          num = leftnum * rightnum;
-          break;
-        case '/':
-          num = leftnum / rightnum;
-          break;
-        case '^':
-          num = pow(leftnum, rightnum);
-          break;
-      }
-    }
-    }
-    char str[20];
+  int digitcounter = 0;
+  double leftnum;
+  double rightnum;
+  char oper;
+  
+  if (sscanf(usertext, "%lf %c %lf", &leftnum, &oper, &rightnum) == 0) {
+    g_print("sscanf error\n");
+  }
+  
+  // make it work for multiple operations, parentheses etc
+  // maybe add things to an array to store, like max 10 operations
+  // and leftnum and rightnums?
+  switch (oper) {
+    case '+':
+      num = leftnum + rightnum;
+      break;
+    case '-':
+      num = leftnum - rightnum;
+      break;
+    case '*':
+      num = leftnum * rightnum;
+      break;
+    case '/':
+      num = leftnum / rightnum;
+      break;
+    case '^':
+      num = pow(leftnum, rightnum);
+      break;
+  }
+  char str[20];
   if (num == (long long)num) {
     snprintf(str, sizeof(str), "%g", num);
   } else {
